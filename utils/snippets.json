@@ -1,0 +1,26 @@
+{
+	"Component with styles": {
+		"prefix": "component",
+		"body": [
+			"import React from 'react';",
+			"import { createStyles, withStyles } from '@material-ui/styles';",
+			"",
+			"const styles = createStyles({",
+			"    root: {",
+			"    }",
+			"})",
+			"",
+			"class ${1:Component} extends React.Component {",
+			"    render = () => {",
+			"        const { classes } = this.props;",
+			"        return (",
+			"            <div className={classes.root}>${0}",
+			"            </div>",
+			"        )",
+			"    }",
+			"};",
+			"",
+			"export default withStyles(styles)(${1:Component});"
+        ]
+	}
+}
