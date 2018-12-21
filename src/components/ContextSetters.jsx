@@ -1,10 +1,8 @@
 import React from 'react';
-import { createStyles, withStyles } from '@material-ui/core';
-import { Button } from '@material-ui/core';
+import { createStyles, withStyles, Button } from '@material-ui/core';
 
-import { withApplicationContext } from 'contexts/ApplicationContext';
-
-import Spacer from './Spacer'
+import { Spacer } from 'components'
+import { withContext, ApplicationContext } from 'utils/contexts';
 
 const styles = theme => createStyles({
     root: {
@@ -18,20 +16,21 @@ const styles = theme => createStyles({
 })
 
 class ContextSetters extends React.Component {
-    setFoo = foo => () => this.props.applicationContext.set({ foo })
+    setColor = color => () => this.props.context.set({ color })
 
     render = () => {
-        const { classes, applicationContext } = this.props;
+        const { classes } = this.props;
+        const { color } = this.props.context;
         return (
             <div className={classes.root}>
                 <div className={classes.flex}>
-                    <Button className={classes.button} variant="contained" color={applicationContext.foo} onClick={this.setFoo("primary")}> Primary </Button>
+                    <Button className={classes.button} variant="contained" color={color} onClick={this.setColor("primary")}> Primary </Button>
                     <Spacer/>
-                    <Button className={classes.button} variant="contained" color={applicationContext.foo} onClick={this.setFoo("secondary")}> Secondary </Button>
+                    <Button className={classes.button} variant="contained" color={color} onClick={this.setColor("secondary")}> Secondary </Button>
                 </div>
             </div>
         )
     }
 };
 
-export default withApplicationContext(withStyles(styles)(ContextSetters));
+export default withContext(ApplicationContext)(withStyles(styles)(ContextSetters));

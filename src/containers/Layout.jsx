@@ -1,10 +1,8 @@
 import React from 'react';
-import { createStyles, withStyles } from '@material-ui/core';
-import { AppBar, Toolbar } from '@material-ui/core';
+import { createStyles, withStyles, AppBar, Toolbar } from '@material-ui/core';
 
-import ContextSetters from 'components/ContextSetters';
-import Spacer from 'components/Spacer'
-import { withApplicationContext } from 'contexts/ApplicationContext';
+import { ContextSetters, Spacer } from 'components'
+import { ApplicationContext, withContext } from 'utils/contexts'
 
 const styles = theme => createStyles({
     root: {
@@ -30,10 +28,10 @@ const styles = theme => createStyles({
 class Layout extends React.Component {
     render = () => {
         const { classes } = this.props;
-        const { foo } = this.props.applicationContext;
+        const { color } = this.props.context;
         return (
             <div className={classes.root}>
-                <AppBar color={foo} className={classes.appBar} position="static">
+                <AppBar color={color} className={classes.appBar} position="static">
                     <Toolbar></Toolbar>
                 </AppBar>
                 <main className={classes.content}>
@@ -46,4 +44,4 @@ class Layout extends React.Component {
     }
 };
 
-export default withApplicationContext(withStyles(styles)(Layout));
+export default withContext(ApplicationContext)(withStyles(styles)(Layout));
