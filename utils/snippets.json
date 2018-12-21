@@ -3,9 +3,9 @@
 		"prefix": "component",
 		"body": [
 			"import React from 'react';",
-			"import { createStyles, withStyles } from '@material-ui/styles';",
+			"import { createStyles, withStyles } from '@material-ui/core';",
 			"",
-			"const styles = createStyles({",
+			"const styles = theme => createStyles({",
 			"    root: {",
 			"    }",
 			"})",
