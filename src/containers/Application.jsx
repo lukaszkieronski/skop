@@ -1,15 +1,18 @@
 import React from 'react';
 import { CssBaseline } from '@material-ui/core';
 
-import AppContext from './AppContext';
-import Layout from './Layout.jsx';
-import initialState from './state.json';
+import AppContext from 'contexts/ApplicationContext';
+import Layout from 'containers/Layout.jsx';
+
+import applicationState from './ApplicationState.json'
 
 class Application extends React.Component {
+
     state = {
-        ...initialState,
-        set: this.setState.bind(this),
-    };
+        ...applicationState,
+        set: this.setState.bind(this)
+    }
+
     render = () => {
         return (
             <CssBaseline>
