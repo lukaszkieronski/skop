@@ -13,11 +13,12 @@ const styles = theme => createStyles({
 
 class ContextSetters extends React.Component {
 
-    propTypes = {
+    static propTypes = {
         context: PropTypes.object
     }
 
     setColor = color => () => this.props.context.set({ color })
+
     render = () => {
         const { color } = this.props.context;
         return (

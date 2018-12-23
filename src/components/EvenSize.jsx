@@ -17,10 +17,10 @@ const styles = theme => createStyles({
 
 class EvenSize extends React.Component {
 
-    propTypes = {
+    static propTypes = {
         classes: PropTypes.object,
         itemMinWidth: PropTypes.number,
-        children: PropTypes.children
+        children: PropTypes.arrayOf(PropTypes.node)
     }
 
     applyClass = (child, index) => {

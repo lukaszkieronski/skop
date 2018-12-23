@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createStyles, withStyles, AppBar, Toolbar } from '@material-ui/core';
+import { createStyles, withStyles, AppBar, Toolbar, Typography } from '@material-ui/core';
 
 import { ContextSetters, Spacer } from 'components'
 import { ApplicationContext, withContext } from 'utils/contexts'
@@ -28,7 +28,7 @@ const styles = theme => createStyles({
 
 class Layout extends React.Component {
 
-    propTypes = {
+    static propTypes = {
         classes: PropTypes.object,
         context: PropTypes.object
     }
@@ -38,8 +38,13 @@ class Layout extends React.Component {
         const { color } = this.props.context;
         return (
             <div className={classes.root}>
-                <AppBar color={color} className={classes.appBar} position="static">
-                    <Toolbar></Toolbar>
+                <AppBar color={color} className={classes.appBar} position="static" >
+                    <Toolbar variant="dense">
+
+                        <Typography variant="h6" color="inherit">
+                            Photos
+                        </Typography>
+                    </Toolbar>
                 </AppBar>
                 <main className={classes.content}>
                     <ContextSetters />

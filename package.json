@@ -2,22 +2,47 @@
   "name": "material",
   "version": "0.1.0",
   "private": true,
+  "main": "./src/electron.js",
+  "homepage": "./",
+  "build": {
+    "extends": null,
+    "files": [
+      "./src/electron.js",
+      "./build/**/*"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ]
+    },
+    "linux": {
+      "target": [
+        "dir"
+      ]
+    }
+  },
   "dependencies": {},
   "devDependencies": {
     "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
+    "concurrently": "^4.1.0",
+    "electron": "^4.0.0",
+    "electron-builder": "^20.38.4",
     "eslint": "^5.10.0",
     "eslint-plugin-react": "^7.11.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.1",
-    "typeface-roboto-multilang": "^1.0.0"
+    "typeface-roboto-multilang": "^1.0.0",
+    "wait-on": "^3.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "concurrently -k 'yarn react-start' 'wait-on http://localhost:3000/ && ELECTRON_START_URL=http://localhost:3000/ electron . --inspect=5858 --remote-debugging-port=9292'",
+    "build": "react-scripts build && electron-builder build",
+    "react-start": "BROWSER=none react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test",
+    "react-eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
