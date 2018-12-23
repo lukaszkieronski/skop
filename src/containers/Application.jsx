@@ -21,6 +21,6 @@ class Application extends React.Component {
             </CssBaseline>
         )
     }
-};
+}
 
 export default Application;

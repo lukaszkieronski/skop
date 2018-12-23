@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { createStyles, withStyles } from '@material-ui/core';
 
 const styles = theme => createStyles({
@@ -15,6 +16,13 @@ const styles = theme => createStyles({
 })
 
 class EvenSize extends React.Component {
+
+    propTypes = {
+        classes: PropTypes.object,
+        itemMinWidth: PropTypes.number,
+        children: PropTypes.children
+    }
+
     applyClass = (child, index) => {
         return React.cloneElement(child, {
             key: index,
@@ -30,6 +38,6 @@ class EvenSize extends React.Component {
                 { children.map(this.applyClass) }
             </div>
         )}
-};
+}
 
 export default withStyles(styles)(EvenSize);

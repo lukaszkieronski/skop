@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { createStyles, withStyles, AppBar, Toolbar } from '@material-ui/core';
 
 import { ContextSetters, Spacer } from 'components'
@@ -26,6 +27,12 @@ const styles = theme => createStyles({
 })
 
 class Layout extends React.Component {
+
+    propTypes = {
+        classes: PropTypes.object,
+        context: PropTypes.object
+    }
+
     render = () => {
         const { classes } = this.props;
         const { color } = this.props.context;
@@ -42,6 +49,6 @@ class Layout extends React.Component {
             </div>
         )
     }
-};
+}
 
 export default withContext(ApplicationContext)(withStyles(styles)(Layout));

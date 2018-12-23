@@ -20,6 +20,6 @@ class Button extends React.Component {
             >{children}</MButton>
         )
     }
-};
+}
 
 export default withStyles(styles)(Button);

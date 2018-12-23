@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { createStyles, withStyles } from '@material-ui/core';
 
-import { Spacer, Button, EvenSize } from 'components'
+import { Button, EvenSize } from 'components'
 import { withContext, ApplicationContext } from 'utils/contexts';
 
 const styles = theme => createStyles({
@@ -11,6 +12,11 @@ const styles = theme => createStyles({
 })
 
 class ContextSetters extends React.Component {
+
+    propTypes = {
+        context: PropTypes.object
+    }
+
     setColor = color => () => this.props.context.set({ color })
     render = () => {
         const { color } = this.props.context;
@@ -29,6 +35,6 @@ class ContextSetters extends React.Component {
             </EvenSize>
         )
     }
-};
+}
 
 export default withContext(ApplicationContext)(withStyles(styles)(ContextSetters));
