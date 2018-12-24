@@ -4,6 +4,8 @@ const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
 
+const ipc = require('./electron/ipcMain')
+
 let mainWindow
 
 function createWindow() {
@@ -21,6 +23,8 @@ function createWindow() {
   mainWindow.on('closed', function () {
     mainWindow = null
   })
+
+  ipc.init(mainWindow)
 }
 
 app.on('ready', createWindow)

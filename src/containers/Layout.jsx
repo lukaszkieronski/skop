@@ -2,8 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createStyles, withStyles, AppBar, Toolbar, Typography } from '@material-ui/core';
 
-import { ContextSetters, Spacer } from 'components'
+import { ContextSetters, Spacer, Button } from 'components'
 import { ApplicationContext, withContext } from 'utils/contexts'
+
+import IPC from 'electron/ipcCommon'
+import Register from 'components/Register';
+const ipc = window.require('electron').ipcRenderer
 
 const styles = theme => createStyles({
     root: {
@@ -40,7 +44,6 @@ class Layout extends React.Component {
             <div className={classes.root}>
                 <AppBar color={color} className={classes.appBar} position="static" >
                     <Toolbar variant="dense">
-
                         <Typography variant="h6" color="inherit">
                             Photos
                         </Typography>
@@ -48,11 +51,29 @@ class Layout extends React.Component {
                 </AppBar>
                 <main className={classes.content}>
                     <ContextSetters />
+                    <Button onClick={this.connect}>Connect</Button>
+                    <Button onClick={this.disconnect}>Disconnect</Button>
+                    <Button onClick={this.enqueue}>Queue</Button>
+                    <Register index={9000}/>
+                    <Register index={9001}/>
+                    <Register index={10000}/>
                     <Spacer />
                     <ContextSetters />
                 </main>
             </div>
         )
+    }
+
+    connect = () => {
+        ipc.send(IPC.SOCKET_CONNECT, {hostname: 'localhost', port:'1502'})
+    }
+
+    disconnect = () => {
+        ipc.send(IPC.SOCKET_DISCONNECT);
+    }
+
+    enqueue = () => {
+        ipc.send(IPC.TEST, {delay:1200})
     }
 }
 
