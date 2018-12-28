@@ -20,12 +20,15 @@ class ModbusService extends React.Component {
         this.state = {
             connected: false,
             registers: new Array(15000),
-            getParameter: this.getParameter
+            getParameter: this.getParameter,
+            connect: this.connect
         }
         this.parameters = parameters;
     }
-    // topParameters: ['urange', 'urms', 'upeak', 'irange', 'irms', 'ipeak' ],
-    // bottomParameters: ['temperature', 'humidity', 'mode', 'hv', 'hour', 'date']
+
+    connect = _ => {
+        ipc.send(IPC.SOCKET_CONNECT, {hostname: 'localhost', port:1502});
+    }
 
     getParameter = parameter => {
         const result = this.parameters[parameter];

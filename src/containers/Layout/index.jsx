@@ -6,6 +6,7 @@ import { createStyles, withStyles, AppBar } from '@material-ui/core';
 import { ModbusContext, withContext } from 'utils/contexts';
 import { Device, Measures, Settings, Parameters } from 'containers';
 import Navigation from './Navigation';
+import Disconnected from './Disconnected';
 
 const styles = theme => {
     return createStyles({
@@ -39,7 +40,7 @@ class Layout extends React.Component {
     }
 
     render = () => {
-        const { classes } = this.props;
+        const { classes, context } = this.props;
         return (
             <div className={classes.root}>
                 <AppBar>
@@ -47,13 +48,16 @@ class Layout extends React.Component {
                 </AppBar>
                 <div className={classes.toolbar}/>
                 <main className={classes.content}>
-                    <Switch>
-                        <Route path="/device" component={Device} />
-                        <Route path="/parameters" component={Parameters} />
-                        <Route path="/measures" component={Measures} />
-                        <Route path="/settings" component={Settings} />
-                        <Redirect to="/device" />
-                    </Switch>
+                    {context.connected === true ?
+                        <Switch>
+                            <Route path="/device" component={Device} />
+                            <Route path="/parameters" component={Parameters} />
+                            <Route path="/measures" component={Measures} />
+                            <Route path="/settings" component={Settings} />
+                            <Redirect to="/device" />
+                        </Switch> :
+                        <Disconnected />
+                    }
 
                 </main>
             </div>
