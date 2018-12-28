@@ -1,2 +1,6 @@
 export { default as Application } from './Application'
 export { default as Layout } from './Layout'
+export { default as Device } from './Device'
+export { default as Parameters } from './Parameters'
+export { default as Measures } from './Measures'
+export { default as Settings } from './Settings'

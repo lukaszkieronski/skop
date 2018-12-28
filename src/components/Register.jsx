@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createStyles, withStyles } from '@material-ui/core';
 
-import { withContext, ApplicationContext } from 'utils/contexts';
+import { withContext, ModbusContext } from 'utils/contexts';
 
 const styles = theme => createStyles({
     root: {
@@ -26,4 +26,4 @@ class ContextSetters extends React.Component {
     }
 }
 
-export default withContext(ApplicationContext)(withStyles(styles)(ContextSetters));
+export default withContext(ModbusContext)(withStyles(styles)(ContextSetters));

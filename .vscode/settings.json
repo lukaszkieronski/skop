@@ -4,5 +4,6 @@
         "xml": {
             "attr_quotes": "single"
         }
-    }
+    },
+    "editor.snippetSuggestions": "top"
 }

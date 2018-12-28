@@ -13,8 +13,8 @@ function init(window) {
     const onSocketConnect = (event, args) => {
         modbus.setSocketOptions(args);
         modbus.connect(
-            () => window.send(IPC.SOCKET_STATE, 'connected'),
-            () => window.send(IPC.SOCKET_STATE, 'disconnected')
+            () => window.send(IPC.SOCKET_STATE, {connected: true}),
+            () => window.send(IPC.SOCKET_STATE, {connected: false})
         );
     }
 

@@ -35,7 +35,7 @@ class Modbus {
     }
 
     async processQueue() {
-        if (this.socket) {
+        if (this.socket && this.socket.readyState === 'open') {
             const diff = Date.now() - this.last;
             if (diff > 1000) {
                 this.getDisplayVariables();
@@ -55,6 +55,9 @@ class Modbus {
 
         this.socket.once('connect', onConnect);
         this.socket.once('close', onClose);
+        this.socket.once('error', (err) => {
+            console.log(err);
+        })
 
         this.client = new jsmodbus.client.TCP(this.socket, 1);
         return this.socket.connect(this.socketOptions);
