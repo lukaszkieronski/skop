@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { ModbusContext } from 'utils/contexts'
+import parameters from 'parameters.json'
 
 import IPC from 'electron/ipcCommon'
 const ipc = window.require('electron').ipcRenderer
@@ -12,16 +13,23 @@ class ModbusService extends React.Component {
         children: PropTypes.object
     }
 
-    state = {
-        color: "primary",
-        connected: false,
-        registers: new Array(15000),
-    }
-
     constructor(props) {
         super(props);
         ipc.on(IPC.MODBUS_RESPONSE, this.updateRegisters);
         ipc.on(IPC.SOCKET_STATE, this.updateConnection);
+        this.state = {
+            connected: false,
+            registers: new Array(15000),
+            getParameter: this.getParameter
+        }
+        this.parameters = parameters;
+    }
+    // topParameters: ['urange', 'urms', 'upeak', 'irange', 'irms', 'ipeak' ],
+    // bottomParameters: ['temperature', 'humidity', 'mode', 'hv', 'hour', 'date']
+
+    getParameter = parameter => {
+        const result = this.parameters[parameter];
+        return result || {};
     }
 
     updateConnection = (_, args) => {

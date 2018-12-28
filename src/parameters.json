@@ -1,0 +1,14 @@
+{
+    "urange":       { "name": "zakres U",       "unit": "" },
+    "urms":         { "name": "Urms",           "unit": "" },
+    "upeak":        { "name": "Upeak",          "unit": "" },
+    "irange":       { "name": "zakres I",       "unit": "" },
+    "irms":         { "name": "Irms",           "unit": "" },
+    "ipeak":        { "name": "Ipeak",          "unit": "" },
+    "temperature":  { "name": "temperatura",    "unit": "C" },
+    "humidity":     { "name": "wilgotność",     "unit": "%" },
+    "mode":         { "name": "tryb pracy",     "unit": "" },
+    "hv":           { "name": "HV",             "unit": "" },
+    "hour":         { "name": "godzina",        "unit": "" },
+    "date":         { "name": "data",           "unit": "" }
+}
