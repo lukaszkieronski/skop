@@ -22,7 +22,7 @@ function init(window) {
 
     const onSwitch = (_, args) => {
         const { register, bit, delay} = args;
-        console.log(register, bit, delay);
+        modbus.switch(register, bit, delay);
     }
 
     const onTest = (_, args) => {

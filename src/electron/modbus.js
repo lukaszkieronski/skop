@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
 
+const utils = require('../utils/conversion')
+
 const jsmodbus = require('jsmodbus');
 const net = require('net')
 
 const IPC = require('./ipcCommon')
-
 
 const timeout = ms => new Promise(res => setTimeout(res, ms))
 
@@ -17,6 +18,7 @@ class Modbus {
         this.client = undefined;
         this.queue = []
         this.last = Date.now()
+        this.lock = 0
 
         setInterval(this.processQueue.bind(this), 100);
     }
@@ -42,8 +44,12 @@ class Modbus {
                 this.last = Date.now()
             } else {
                 if (this.queue.length > 0) {
-                    console.log(this.queue.pop())
-                    this.client.readHoldingRegisters(10000,100).then(this.sendResponse.bind(this))
+                    const command = this.queue.pop();
+                    if (command.set) {
+                        this.client.writeSingleRegister(command.register, command.value);
+                    } else {
+                        this.client.readHoldingRegisters(command.register, command.count).then(this.sendResponse.bind(this));
+                    }
                 }
             }
         }
@@ -69,6 +75,22 @@ class Modbus {
             this.socket = undefined
             this.client = undefined
             return await timeout(100);
+        }
+    }
+
+    async switch(register, bit, delay) {
+        if (this.lock === 0)
+        {
+            this.lock ++
+            const packet = await this.client.readHoldingRegisters(register,1);
+            const value = packet.response.body.values.pop();
+            const set = utils.setBit(value, bit);
+            const reset = utils.clearBit(value, bit);
+            this.queue.push({set:true, register, value:set});
+            setTimeout(() => {
+                this.queue.push({set:true, register, value:reset});
+                this.lock --
+            }, delay);
         }
     }
 
