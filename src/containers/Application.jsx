@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 
-import { ModbusService } from 'components';
+import { ModbusService } from 'services';
 import { Layout } from 'containers';
 
 class Application extends React.Component {

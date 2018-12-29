@@ -20,6 +20,11 @@ function init(window) {
         );
     }
 
+    const onSwitch = (_, args) => {
+        const { register, bit, delay} = args;
+        console.log(register, bit, delay);
+    }
+
     const onTest = (_, args) => {
         const options = {
             type: 'info',
@@ -32,6 +37,7 @@ function init(window) {
 
     ipcMain.on(IPC.SOCKET_CONNECT, onSocketConnect);
     ipcMain.on(IPC.SOCKET_DISCONNECT, modbus.disconnect.bind(modbus));
+    ipcMain.on(IPC.SWITCH, onSwitch);
     ipcMain.on(IPC.TEST, onTest)
 }
 

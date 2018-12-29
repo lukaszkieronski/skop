@@ -5,5 +5,6 @@ module.exports = {
     SOCKET_DISCONNECT: 'socket-disconnect',
     SOCKET_STATE: 'socket-state',
     MODBUS_RESPONSE: 'modbus-response',
+    SWITCH: 'modbus-switch',
     TEST: "test-signal"
 }

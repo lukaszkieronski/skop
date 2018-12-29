@@ -25,15 +25,15 @@ class CommonControlls extends React.Component {
     }
 
     handleStart = _ => {
-        this.props.context.test({command: "start", register: 213});
+        this.props.context.switch({ register: 9007, bit: 2, delay: 400 });
     }
 
     handleStop = _ => {
-        this.props.context.test('stop');
+        this.props.context.switch({ register: 9007, bit: 3, delay: 400 });
     }
 
     handleClear = _ => {
-        this.props.context.test('clear');
+        this.props.context.switch({ register: 9006, bit: 15, delay: 400 });
     }
 
     render = () => {
