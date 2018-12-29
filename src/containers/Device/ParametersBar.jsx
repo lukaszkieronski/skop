@@ -39,7 +39,7 @@ class ParametersBar extends React.Component {
         const { classes, context } = this.props;
         const parameter = context.getParameter(parameterName)
         return (
-            <div className={classes.item}>
+            <div className={classes.item} key={index}>
             <Paper key={index} className={classes.paper}>
                 <Typography className={classes.subtitle} variant="subtitle1" color="textSecondary">
                     {parameter.name} {parameter.unit}

@@ -18,20 +18,27 @@ class ModbusService extends React.Component {
 
     constructor(props) {
         super(props);
-        ipc.on(IPC.MODBUS_RESPONSE, this.updateRegisters);
-        ipc.on(IPC.SOCKET_STATE, this.updateConnection);
+
+        const savedConfig = JSON.parse(window.localStorage.getItem('config'));
+        const defaultConfig = { socket: {host: 'localhost', port: 1502 } }
+
         this.state = {
+            config: savedConfig || defaultConfig,
             connected: false,
             registers: new Array(15000),
+            setConfig: this.setConfig,
             getParameter: this.getParameter,
             connect: this.connect,
             switch: this.switch,
             test: this.test
         }
+
+        ipc.on(IPC.MODBUS_RESPONSE, this.updateRegisters);
+        ipc.on(IPC.SOCKET_STATE, this.updateConnection);
     }
 
     connect = _ => {
-        ipc.send(IPC.SOCKET_CONNECT, {hostname: 'localhost', port:1502});
+        ipc.send(IPC.SOCKET_CONNECT, this.state.config.socket);
     }
 
     switch = args => {
@@ -40,6 +47,13 @@ class ModbusService extends React.Component {
 
     test = args => {
         ipc.send(IPC.TEST, args);
+    }
+
+    setConfig = config => {
+        this.setState({config}, _ => {
+            window.localStorage.setItem('config', JSON.stringify(config));
+            this.connect();
+        });
     }
 
     getParameter = parameterName => {

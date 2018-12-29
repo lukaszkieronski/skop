@@ -46,18 +46,15 @@ class Layout extends React.Component {
                 <AppBar>
                     <Navigation />
                 </AppBar>
-                <div className={classes.toolbar}/>
+                <div className={classes.toolbar} />
                 <main className={classes.content}>
-                    {context.connected === true ?
-                        <Switch>
-                            <Route path="/device" component={Device} />
-                            <Route path="/parameters" component={Parameters} />
-                            <Route path="/measures" component={Measures} />
-                            <Route path="/settings" component={Settings} />
-                            <Redirect to="/device" />
-                        </Switch> :
-                        <Disconnected />
-                    }
+                    <Switch>
+                        <Route path="/device" component={context.connected ? Device : Disconnected} />
+                        <Route path="/parameters" component={context.connected ? Parameters : Disconnected} />
+                        <Route path="/measures" component={context.connected ? Measures : Disconnected} />
+                        <Route path="/settings" component={Settings} />
+                        <Redirect to="/device" />
+                    </Switch>
 
                 </main>
             </div>

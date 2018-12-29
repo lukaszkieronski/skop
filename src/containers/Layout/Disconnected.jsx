@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createStyles, withStyles } from '@material-ui/core';
+import { createStyles, withStyles, Typography } from '@material-ui/core';
 import { Button } from 'components';
 
 import { ModbusContext, withContext } from 'utils';
@@ -10,6 +10,7 @@ const styles = theme => createStyles({
     root: {
         flex: 1,
         display: 'flex',
+        flexDirection:'column',
         alignItems: 'center',
         justifyContent: 'center',
     }
@@ -26,7 +27,8 @@ class Disconnected extends React.Component {
         const { classes, context } = this.props;
         return (
             <div className={classes.root}>
-                <Button onClick={context.connect}>Połącz</Button>
+                <Typography variant='headline'>Brak połączenia z urządzeniem !</Typography>
+                <Button onClick={context.connect}>Połącz ponownie</Button>
             </div>
         )
     }

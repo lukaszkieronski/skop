@@ -16,6 +16,7 @@ class Button extends React.Component {
             <MButton
                 className={classes.root}
                 variant="contained"
+                color="primary"
                 {...otherProps}
             >{children}</MButton>
         )
