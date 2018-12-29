@@ -25,6 +25,7 @@ class Navigation extends React.Component {
                 <Tab value="/parameters" label="Parametry" />
                 <Tab value="/measures" label="Pomiary" />
                 <Tab value="/settings" label="Ustawienia" />
+                <Tab value="/debug" label="Debug" />
             </Tabs>
         )
     }

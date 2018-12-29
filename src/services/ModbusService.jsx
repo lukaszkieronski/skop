@@ -66,10 +66,10 @@ class ModbusService extends React.Component {
     saveParameters = parameters => {
         for (const parameterName in parameters) {
             const parameter = parameters[parameterName];
-            const { value, values, register, shift } = parameter;
+            const { value, values, register, shift, mask } = parameter;
             switch (parameter.type) {
                 case 'flag':
-                    ipc.send(IPC.SET_BIT, {register, bit: values.indexOf(value) + (shift || 0)});
+                    ipc.send(IPC.SET_BIT, {register, bit: values.indexOf(value) + (shift || 0), mask});
                     break;
                 default:
                     ipc.send(IPC.SET_REGISTERS, {register, values: Array.from(floatToRegister(value))});

@@ -36,8 +36,8 @@ function init(window) {
     }
 
     const onSetBit = (_, args) => {
-        const {bit, register} = args;
-        modbus.setBit(register, bit)
+        const {bit, register, mask} = args;
+        modbus.setBit(register, bit, mask)
     }
 
     const onSetRegisters = (_, args) => {

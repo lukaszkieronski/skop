@@ -55,9 +55,12 @@ class Modbus {
         }
     }
 
-    async setBit(register, bit) {
+    async setBit(register, bit, mask) {
         const packet = await this.client.readHoldingRegisters(register,1);
-        const value = packet.response.body.values.pop();
+        let value = packet.response.body.values.pop();
+        for (let i=0; i<16; i++){
+            if (utils.getBit(mask, i)) value = utils.clearBit(value, i);
+        }
         const set = utils.setBit(value, bit);
         this.queue.push({set:true, register, value:set});
     }
