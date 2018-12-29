@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { createStyles, withStyles } from '@material-ui/core';
 import { Button } from 'components';
 
-import { ModbusContext, withContext } from 'utils/contexts';
+import { ModbusContext, withContext } from 'utils';
 
 
 const styles = theme => createStyles({
@@ -18,7 +18,8 @@ const styles = theme => createStyles({
 class Disconnected extends React.Component {
 
     static propTypes = {
-        classes: PropTypes.object
+        classes: PropTypes.object,
+        context: PropTypes.object
     }
 
     render = () => {

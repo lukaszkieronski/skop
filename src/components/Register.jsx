@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createStyles, withStyles } from '@material-ui/core';
 
-import { withContext, ModbusContext } from 'utils/contexts';
+import { withContext, ModbusContext } from 'utils';
 
 const styles = theme => createStyles({
     root: {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { createStyles, withStyles, Paper, Typography } from '@material-ui/core';
 
-import { withContext, ModbusContext } from 'utils/contexts'
+import { withContext, ModbusContext } from 'utils'
 
 const styles = theme => createStyles({
     root: {
@@ -10,7 +10,7 @@ const styles = theme => createStyles({
         justifyContent: 'space-between',
     },
     item: {
-        flex: '1 1 150px',
+        flex: '1 1 0',
         display: 'flex',
         justifyContent: "space-around"
     },
@@ -19,10 +19,11 @@ const styles = theme => createStyles({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        minWidth: '120px',
+        minWidth: '150px',
         userSelect: 'none',
         whiteSpace: 'nowrap',
-        fontVariant: 'small-caps'
+        fontVariant: 'small-caps',
+        textAlign: "center",
     }
 })
 
@@ -41,7 +42,7 @@ class ParametersBar extends React.Component {
             <div className={classes.item}>
             <Paper key={index} className={classes.paper}>
                 <Typography className={classes.subtitle} variant="subtitle1" color="textSecondary">
-                    {parameter.name} {parameter.unit && `[${parameter.unit}]`}
+                    {parameter.name} {parameter.unit}
                 </Typography>
                 <Typography variant="display1" color={"textPrimary"}>
                     {parameter.value}

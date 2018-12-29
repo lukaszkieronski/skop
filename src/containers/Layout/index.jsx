@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { createStyles, withStyles, AppBar } from '@material-ui/core';
 
-import { ModbusContext, withContext } from 'utils/contexts';
+import { ModbusContext, withContext } from 'utils';
 import { Device, Measures, Settings, Parameters } from 'containers';
 import Navigation from './Navigation';
 import Disconnected from './Disconnected';

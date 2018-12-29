@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ModbusContext } from 'utils/contexts'
-import parameters from 'parameters.json'
+import { ParameterFactory, ModbusContext } from 'utils'
 
 import IPC from 'electron/ipcCommon'
 const ipc = window.require('electron').ipcRenderer
@@ -23,16 +22,14 @@ class ModbusService extends React.Component {
             getParameter: this.getParameter,
             connect: this.connect
         }
-        this.parameters = parameters;
     }
 
     connect = _ => {
         ipc.send(IPC.SOCKET_CONNECT, {hostname: 'localhost', port:1502});
     }
 
-    getParameter = parameter => {
-        const result = this.parameters[parameter];
-        return result || {};
+    getParameter = parameterName => {
+        return ParameterFactory.create(parameterName, this.state.registers);
     }
 
     updateConnection = (_, args) => {

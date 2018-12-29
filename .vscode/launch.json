@@ -9,7 +9,7 @@
             "request": "attach",
             "name": "render",
             "port": 9292,
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}/src"
         },
         {
             "type": "node",

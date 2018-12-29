@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { createStyles, withStyles } from '@material-ui/core';
 
 import { Button, EvenSize } from 'components'
-import { withContext, ModbusContext } from 'utils/contexts';
+import { withContext, ModbusContext } from 'utils';
 
 const styles = theme => createStyles({
     root: {

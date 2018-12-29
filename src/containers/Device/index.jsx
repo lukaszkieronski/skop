@@ -24,7 +24,7 @@ class Device extends React.Component {
 
     state = {
         topParameters: ['urange', 'urms', 'upeak', 'irange', 'irms', 'ipeak' ],
-        bottomParameters: ['temperature', 'humidity', 'mode', 'hv', 'hour', 'date']
+        bottomParameters: ['temperature', 'humidity', 'mode', 'hv', 'time', 'date']
     }
 
     render = () => {
