@@ -40,13 +40,13 @@
     },
     "temperature": {
         "name": "temperatura",
-        "unit": "C",
+        "unit": "[C]",
         "register": 9234,
         "digits": 1
     },
     "humidity": {
         "name": "wilgotność",
-        "unit": "%",
+        "unit": "[%]",
         "register": 9236
     },
     "mode": {
@@ -71,5 +71,104 @@
     },
     "date": {
         "type": "date"
+    },
+    "urms200": {
+        "name":"RMS 200 kV",
+        "register": 9200,
+        "digits": 1,
+        "min": 0,
+        "max": 200
+    },
+    "urms100": {
+        "name":"RMS 100 kV",
+        "register": 9204,
+        "digits": 1,
+        "min": 0,
+        "max": 100
+    },
+    "irms200": {
+        "name":"RMS 200 mA",
+        "register": 9210,
+        "digits": 1,
+        "min": 0,
+        "max": 200
+    },
+    "irms20": {
+        "name":"RMS 20 mA",
+        "register": 9214,
+        "digits": 2,
+        "min": 0,
+        "max": 20
+    },
+    "irms2": {
+        "name":"RMS 2 mA",
+        "register": 9218,
+        "digits": 3,
+        "min": 0,
+        "max": 2
+    },
+    "irms02": {
+        "name":"RMS 200 uA",
+        "register": 9222,
+        "digits": 1,
+        "min": 0,
+        "max": 200
+    },
+    "upeak200": {
+        "name":"PEAK 200 kV",
+        "register": 9202,
+        "digits": 1,
+        "min": 0,
+        "max": 282.8
+    },
+    "upeak100": {
+        "name":"PEAK 100 kV",
+        "register": 9206,
+        "digits": 1,
+        "min": 0,
+        "max": 141.4
+    },
+    "ipeak200": {
+        "name":"PEAK 200 mA",
+        "register": 9212,
+        "digits": 1,
+        "min": 0,
+        "max": 282.8
+    },
+    "ipeak20": {
+        "name":"PEAK 20 mA",
+        "register": 9216,
+        "digits": 2,
+        "min": 0,
+        "max": 28.28
+    },
+    "ipeak2": {
+        "name":"PEAK 2 mA",
+        "register": 9220,
+        "digits": 3,
+        "min": 0,
+        "max": 2.828
+    },
+    "ipeak02": {
+        "name":"PEAK 200 uA",
+        "register": 9224,
+        "digits": 1,
+        "min": 0,
+        "max": 282.8
+    },
+    "iref1": {
+        "name":"Charakterystyka 1",
+        "register": 9242,
+        "digits": 2,
+        "min": 0,
+        "max": 200
+    },
+    "iref2": {
+        "name":"Charakterystyka 2",
+        "register": 9244,
+        "digits": 2,
+        "min": 0,
+        "max": 200
     }
+
 }

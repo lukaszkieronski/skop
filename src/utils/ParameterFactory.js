@@ -64,8 +64,7 @@ export default class ParameterFactory {
 
                 default: {
                     return {
-                        name: parameterDescription.name,
-                        unit: parameterDescription.unit && `[${parameterDescription.unit}]`,
+                        ...parameterDescription,
                         value: registerToFloat(data, parameterDescription.digits || 0)
                     }
                 }
