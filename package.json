@@ -1,6 +1,6 @@
 {
-  "name": "material",
-  "version": "0.1.0",
+  "name": "skop",
+  "version": "0.2.0",
   "private": true,
   "main": "./src/electron.js",
   "homepage": "./",
@@ -8,6 +8,8 @@
     "extends": null,
     "files": [
       "./src/electron.js",
+      "./src/electron/*.js",
+      "./src/utils/conversion.js",
       "./build/**/*"
     ],
     "win": {
