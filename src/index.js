@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'typeface-roboto-multilang'
+import 'typeface-roboto-multilang/latin-ext.css'
 import './index.css'
 import { Application } from 'containers'
 

@@ -42,7 +42,7 @@ class CommonControlls extends React.Component {
             <div className={classes.root}>
                 <Button className={classes.button} onClick={this.handleStart}>Start</Button>
                 <Button className={classes.button} onClick={this.handleStop}>Stop</Button>
-                <Button className={classes.button} onClick={this.handleClear}>Clear</Button>
+                <Button className={classes.button} onClick={this.handleClear}>Wyczyść</Button>
             </div>
         )
     }
