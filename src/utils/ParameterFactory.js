@@ -35,6 +35,7 @@ export default class ParameterFactory {
                 case 'flag': {
                     const value = Math.log2((registers[parameterDescription.register] & parameterDescription.mask) >> parameterDescription.shift)
                     return {
+                        ...parameterDescription,
                         name: parameterDescription.name,
                         value: parameterDescription.values[value],
                         unit: parameterDescription.units[value] && `[${parameterDescription.units[value]}]`,

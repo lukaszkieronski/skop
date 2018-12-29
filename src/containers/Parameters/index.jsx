@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { createStyles, withStyles, Typography, TextField } from '@material-ui/core';
+import { createStyles, withStyles, Typography, TextField, FormControl, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 import { Button } from 'components';
 import { withContext } from 'utils/contexts';
 import { ModbusContext } from 'utils/contexts';
@@ -34,7 +34,7 @@ class Parameters extends React.Component {
         this.state = [
             'urms200', 'urms100', 'irms200', 'irms20', 'irms2', 'irms02',
             'upeak200', 'upeak100', 'ipeak200', 'ipeak20', 'ipeak2','ipeak02',
-            'iref1', 'iref2'
+            'iref1', 'iref2', 'sampleSpeed'
         ].reduce((p, c) => {
             p[c] = context.getParameter(c)
             return p
@@ -69,12 +69,22 @@ class Parameters extends React.Component {
     handleParamChange = event => {
         const { target } = event;
         const register = JSON.parse(JSON.stringify(this.state[target.id]));
-        register.value = target.value
+        register.value = +target.value
         this.setState({ [target.id]: register })
     }
 
+    handleSpeedChange = event => {
+        const { target } = event;
+        const register = JSON.parse(JSON.stringify(this.state.sampleSpeed));
+        register.value = +target.value
+        this.setState({ sampleSpeed: register })
+    }
+
     handleSave = () => {
-        console.log("should save");
+        const { context } = this.props;
+        const parameters = JSON.parse(JSON.stringify(this.state));
+        parameters.sampleSpeed.register = 9005;
+        context.saveParameters(parameters);
     }
 
 
@@ -95,6 +105,19 @@ class Parameters extends React.Component {
                     {['iref1', 'iref2'].map(this.renderParameter)}
                 </form>
                 <Typography variant="headline"> Prędkość zapisu przebiegu próby : </Typography>
+                <FormControl component="fieldset">
+                        <RadioGroup
+                            value={`${this.state.sampleSpeed.value}`}
+                            onChange={this.handleSpeedChange}
+                            row
+                        >
+                            <FormControlLabel value="10" control={<Radio />} label="10 / sec" />
+                            <FormControlLabel value="5" control={<Radio />} label="5 / sec" />
+                            <FormControlLabel value="1" control={<Radio />} label="1 / sec" />
+                            <FormControlLabel value="0.5" control={<Radio />} label="0,5 / sec" />
+                            <FormControlLabel value="0.1" control={<Radio />} label="0,1 / sec" />
+                        </RadioGroup>
+                    </FormControl>
                 <div className={classes.spacer} />
                 <div>
                     <Button onClick={this.handleSave} disabled={!canSave}>Zapisz</Button>

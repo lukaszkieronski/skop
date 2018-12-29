@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { ParameterFactory, ModbusContext } from 'utils'
 
+import { floatToRegister } from 'utils/conversion'
+
 import IPC from 'electron/ipcCommon'
 const ipc = window.require('electron').ipcRenderer
 
@@ -20,7 +22,7 @@ class ModbusService extends React.Component {
         super(props);
 
         const savedConfig = JSON.parse(window.localStorage.getItem('config'));
-        const defaultConfig = { socket: {host: 'localhost', port: 1502 } }
+        const defaultConfig = { socket: { host: 'localhost', port: 1502 } }
 
         this.state = {
             config: savedConfig || defaultConfig,
@@ -28,6 +30,7 @@ class ModbusService extends React.Component {
             registers: new Array(15000),
             setConfig: this.setConfig,
             getParameter: this.getParameter,
+            saveParameters: this.saveParameters,
             connect: this.connect,
             switch: this.switch,
             test: this.test
@@ -50,7 +53,7 @@ class ModbusService extends React.Component {
     }
 
     setConfig = config => {
-        this.setState({config}, _ => {
+        this.setState({ config }, _ => {
             window.localStorage.setItem('config', JSON.stringify(config));
             this.connect();
         });
@@ -60,9 +63,24 @@ class ModbusService extends React.Component {
         return ParameterFactory.create(parameterName, this.state.registers);
     }
 
+    saveParameters = parameters => {
+        for (const parameterName in parameters) {
+            const parameter = parameters[parameterName];
+            const { value, values, register, shift } = parameter;
+            switch (parameter.type) {
+                case 'flag':
+                    ipc.send(IPC.SET_BIT, {register, bit: values.indexOf(value) + (shift || 0)});
+                    break;
+                default:
+                    ipc.send(IPC.SET_REGISTERS, {register, values: Array.from(floatToRegister(value))});
+                    break;
+            }
+        }
+    }
+
     updateConnection = (_, args) => {
         const { connected } = args;
-        this.setState({connected});
+        this.setState({ connected });
     }
 
     updateRegisters = (_, args) => {
@@ -72,7 +90,7 @@ class ModbusService extends React.Component {
         for (let index = 0; index < count; index++) {
             registers[start + index] = values[index];
         }
-        this.setState({registers})
+        this.setState({ registers })
     };
 
 

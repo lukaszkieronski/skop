@@ -55,6 +55,20 @@ class Modbus {
         }
     }
 
+    async setBit(register, bit) {
+        const packet = await this.client.readHoldingRegisters(register,1);
+        const value = packet.response.body.values.pop();
+        const set = utils.setBit(value, bit);
+        this.queue.push({set:true, register, value:set});
+    }
+
+    async setRegisters(args) {
+        for (let index = 0; index < args.values.length; index++) {
+            const value = args.values[index];
+            this.queue.push({set:true, register: args.register + index, value});
+        }
+    }
+
     async connect(onConnect, onClose) {
         await this.disconnect()
         this.socket = new net.Socket();

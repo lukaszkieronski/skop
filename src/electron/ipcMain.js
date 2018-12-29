@@ -35,9 +35,21 @@ function init(window) {
         dialog.showMessageBox(window, options);
     }
 
+    const onSetBit = (_, args) => {
+        const {bit, register} = args;
+        modbus.setBit(register, bit)
+    }
+
+    const onSetRegisters = (_, args) => {
+        modbus.setRegisters(args)
+    }
+
+
     ipcMain.on(IPC.SOCKET_CONNECT, onSocketConnect);
     ipcMain.on(IPC.SOCKET_DISCONNECT, modbus.disconnect.bind(modbus));
     ipcMain.on(IPC.SWITCH, onSwitch);
+    ipcMain.on(IPC.SET_BIT, onSetBit);
+    ipcMain.on(IPC.SET_REGISTERS, onSetRegisters);
     ipcMain.on(IPC.TEST, onTest)
 }
 
