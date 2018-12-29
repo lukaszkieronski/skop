@@ -19,7 +19,9 @@ function createWindow() {
     protocol: 'file:',
     slashes: true
   });
+  mainWindow.setTitle("SKOP");
   mainWindow.loadURL(startUrl);
+  mainWindow.maximize();
 
   // mainWindow.webContents.openDevTools()
 

@@ -12,6 +12,10 @@ class ModbusService extends React.Component {
         children: PropTypes.object
     }
 
+    componentDidMount() {
+        this.connect();
+    }
+
     constructor(props) {
         super(props);
         ipc.on(IPC.MODBUS_RESPONSE, this.updateRegisters);
@@ -20,12 +24,17 @@ class ModbusService extends React.Component {
             connected: false,
             registers: new Array(15000),
             getParameter: this.getParameter,
-            connect: this.connect
+            connect: this.connect,
+            test: this.test
         }
     }
 
     connect = _ => {
         ipc.send(IPC.SOCKET_CONNECT, {hostname: 'localhost', port:1502});
+    }
+
+    test = args => {
+        ipc.send(IPC.TEST, args);
     }
 
     getParameter = parameterName => {

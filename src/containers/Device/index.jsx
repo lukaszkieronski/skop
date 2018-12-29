@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { createStyles, withStyles } from '@material-ui/core';
 
 import ParametersBar from './ParametersBar'
+import CommonControlls from './CommonControlls';
 
 const styles = theme => createStyles({
     root: {
@@ -23,7 +24,7 @@ class Device extends React.Component {
     }
 
     state = {
-        topParameters: ['urange', 'urms', 'upeak', 'irange', 'irms', 'ipeak' ],
+        topParameters: ['urange', 'urms', 'upeak', 'irange', 'irms', 'ipeak'],
         bottomParameters: ['temperature', 'humidity', 'mode', 'hv', 'time', 'date']
     }
 
@@ -32,9 +33,10 @@ class Device extends React.Component {
         const { topParameters, bottomParameters } = this.state;
         return (
             <div className={classes.root}>
-            <ParametersBar parameters={topParameters}/>
-            <div className={classes.grow}></div>
-            <ParametersBar parameters={bottomParameters}/>
+                <ParametersBar parameters={topParameters} />
+                <div className={classes.grow}></div>
+                <CommonControlls />
+                <ParametersBar parameters={bottomParameters} />
             </div>
         )
     }

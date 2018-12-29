@@ -75,10 +75,6 @@ class Modbus {
     setSocketOptions(args) {
         this.socketOptions = args;
     }
-
-    test(e, a) {
-        this.queue.push(a);
-    }
 }
 
 module.exports = Modbus;

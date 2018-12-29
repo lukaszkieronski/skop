@@ -1,8 +1,10 @@
 {
 	"Component with styles": {
-		"prefix": "component",
+		"prefix": "cws",
 		"body": [
 			"import React from 'react';",
+			"import PropTypes from 'prop-types';",
+			"",
 			"import { createStyles, withStyles } from '@material-ui/core';",
 			"",
 			"const styles = theme => createStyles({",
@@ -11,6 +13,11 @@
 			"})",
 			"",
 			"class ${1:Component} extends React.Component {",
+			"",
+			"    static propTypes = {",
+			"        classes: PropTypes.object,",
+			"    }",
+			"",
 			"    render = () => {",
 			"        const { classes } = this.props;",
 			"        return (",
@@ -18,9 +25,9 @@
 			"            </div>",
 			"        )",
 			"    }",
-			"};",
+			"}",
 			"",
 			"export default withStyles(styles)(${1:Component});"
-        ]
+		]
 	}
 }

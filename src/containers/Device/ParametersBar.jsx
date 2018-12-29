@@ -19,7 +19,7 @@ const styles = theme => createStyles({
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: theme.spacing.unit * 2,
-        minWidth: '150px',
+        minWidth: '120px',
         userSelect: 'none',
         whiteSpace: 'nowrap',
         fontVariant: 'small-caps',

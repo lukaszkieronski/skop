@@ -6,6 +6,8 @@ const Modbus = require('./modbus')
 const IPC = require('./ipcCommon')
 
 
+const { dialog } = require('electron')
+
 function init(window) {
 
     const modbus = new Modbus(window)
@@ -18,9 +20,19 @@ function init(window) {
         );
     }
 
+    const onTest = (_, args) => {
+        const options = {
+            type: 'info',
+            buttons: ['OK'],
+            title: 'Info',
+            message: JSON.stringify(args),
+        }
+        dialog.showMessageBox(window, options);
+    }
+
     ipcMain.on(IPC.SOCKET_CONNECT, onSocketConnect);
     ipcMain.on(IPC.SOCKET_DISCONNECT, modbus.disconnect.bind(modbus));
-    ipcMain.on(IPC.TEST, modbus.test.bind(modbus))
+    ipcMain.on(IPC.TEST, onTest)
 }
 
 module.exports = {
