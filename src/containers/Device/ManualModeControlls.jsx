@@ -48,6 +48,8 @@ class ManualModeControlls extends React.Component {
         }
     }
 
+    lastUpdate = Date.now()
+
     componentDidMount() {
         const { context } = this.props;
         const uspeed = context.getParameter('uspeed')
@@ -57,6 +59,7 @@ class ManualModeControlls extends React.Component {
     sendSpeed = () => {
         const { context } = this.props;
         context.saveParameters(this.state);
+        this.timeout = undefined
     }
 
     setValue = value => {
@@ -64,6 +67,7 @@ class ManualModeControlls extends React.Component {
         if (value > uspeed.max || value < uspeed.min) return;
         const state = JSON.parse(JSON.stringify(this.state))
         state.uspeed.value = +value;
+        this.lastUpdate = Date.now()
         this.setState(state, () => {
             clearTimeout(this.timeout);
             this.timeout = setTimeout(this.sendSpeed, 500);
@@ -75,8 +79,10 @@ class ManualModeControlls extends React.Component {
     handleButtonChange = value => () => this.setValue(value)
 
     render = () => {
-        const { classes } = this.props;
+        const { classes, context } = this.props;
         const { uspeed } = this.state;
+        const updateSource = Date.now() - this.lastUpdate > 1000;
+        const speed = updateSource ? context.getParameter('uspeed').value : uspeed.value;
         return (
             <div className={classes.root}>
                 <div>
@@ -84,7 +90,7 @@ class ManualModeControlls extends React.Component {
                         <Typography variant="headline">Prędkość zmiany napięcia :</Typography>
                         <TextField
                             className={classes.textField}
-                            value={uspeed.value}
+                            value={speed}
                             margin="normal"
                             InputLabelProps={{
                                 shrink: true,
@@ -105,7 +111,7 @@ class ManualModeControlls extends React.Component {
                     </div>
                         <Slider
                             classes={{ container: classes.slider }}
-                            value={uspeed.value}
+                            value={speed}
                             min={uspeed.min}
                             max={uspeed.max}
                             step={500}

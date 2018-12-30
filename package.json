@@ -45,7 +45,7 @@
   },
   "scripts": {
     "start": "concurrently -k 'yarn react-start' 'wait-on http://localhost:3000/ && ELECTRON_START_URL=http://localhost:3000/ electron . --inspect=5858 --remote-debugging-port=9292'",
-    "build": "react-scripts build && electron-builder build -w",
+    "build": "react-scripts build && electron-builder build -l",
     "react-start": "BROWSER=none react-scripts start",
     "react-build": "react-scripts build",
     "react-test": "react-scripts test",
