@@ -68,6 +68,9 @@ class ModbusService extends React.Component {
             const parameter = parameters[parameterName];
             const { value, values, register, shift, mask } = parameter;
             switch (parameter.type) {
+                case 'unsigned':
+                    ipc.send(IPC.SET_REGISTERS, {register, values:[value]})
+                    break;
                 case 'flag':
                     ipc.send(IPC.SET_BIT, {register, bit: values.indexOf(value) + (shift || 0), mask});
                     break;

@@ -232,5 +232,12 @@
             1,
             1
         ]
+    },
+    "uspeed": {
+        "type": "unsigned",
+        "register": 9021,
+        "name": "prędkość zmiany napięcia",
+        "min": 0,
+        "max": 10000
     }
 }

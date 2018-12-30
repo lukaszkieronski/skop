@@ -63,6 +63,13 @@ export default class ParameterFactory {
                     }
                 }
 
+                case 'unsigned': {
+                    return {
+                        ...parameterDescription,
+                        value: registers[parameterDescription.register]
+                    }
+                }
+
                 default: {
                     return {
                         ...parameterDescription,

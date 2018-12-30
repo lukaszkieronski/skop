@@ -4,6 +4,11 @@ import { createStyles, withStyles } from '@material-ui/core';
 
 import ParametersBar from './ParametersBar'
 import CommonControlls from './CommonControlls';
+import AutomaticModeControlls from './AutomaticModeControlls'
+import ManualModeControlls from './ManualModeControlls'
+
+import { withContext } from 'utils/contexts';
+import { ModbusContext } from 'utils/contexts';
 
 const styles = theme => createStyles({
     root: {
@@ -13,14 +18,16 @@ const styles = theme => createStyles({
         flexDirection: 'column',
     },
     grow: {
-        flex: 1
+        flex: 1,
+        display: 'flex'
     }
 })
 
 class Device extends React.Component {
 
     static propTypes = {
-        classes: PropTypes.object
+        classes: PropTypes.object,
+        context: PropTypes.object
     }
 
     state = {
@@ -29,12 +36,16 @@ class Device extends React.Component {
     }
 
     render = () => {
-        const { classes } = this.props;
+        const { classes, context } = this.props;
+        const mode = context.getParameter('mode');
         const { topParameters, bottomParameters } = this.state;
         return (
             <div className={classes.root}>
                 <ParametersBar parameters={topParameters} />
-                <div className={classes.grow}></div>
+                <div className={classes.grow}>
+                    {mode.value === 'Auto' && <AutomaticModeControlls />}
+                    {mode.value === 'Manual' && <ManualModeControlls />}
+                </div>
                 <CommonControlls />
                 <ParametersBar parameters={bottomParameters} />
             </div>
@@ -42,4 +53,4 @@ class Device extends React.Component {
     }
 }
 
-export default withStyles(styles)(Device);
+export default withStyles(styles)(withContext(ModbusContext)(Device));
