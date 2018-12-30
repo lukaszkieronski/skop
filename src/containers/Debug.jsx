@@ -54,12 +54,18 @@ class Debug extends React.Component {
         });
     }
 
+    saveDump = _ => {
+        const { context } = this.props;
+        context.saveDump();
+    }
+
     render = () => {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
                 <Button onClick={this.setAutomatic}>Automatic</Button>
                 <Button onClick={this.setManual}>Manual</Button>
+                <Button onClick={this.saveDump}>Zrzut pamięci</Button>
             </div>
         )
     }

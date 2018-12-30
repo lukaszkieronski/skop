@@ -8,5 +8,6 @@ module.exports = {
     SWITCH: 'modbus-switch',
     SET_BIT: 'modbus-set-bit',
     SET_REGISTERS: 'modbus-set-registers',
+    SAVE_DUMP: 'modbus-save-dump',
     TEST: "test-signal"
 }

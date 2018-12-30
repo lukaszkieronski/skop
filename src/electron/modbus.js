@@ -29,7 +29,6 @@ class Modbus {
         this.window.send(IPC.MODBUS_RESPONSE, {start, count, values});
     }
 
-
     getDisplayVariables() {
         this.client.readHoldingRegisters(9000,100).then(this.sendResponse.bind(this))
         this.client.readHoldingRegisters(9100,100).then(this.sendResponse.bind(this))
@@ -113,6 +112,15 @@ class Modbus {
 
     setSocketOptions(args) {
         this.socketOptions = args;
+    }
+
+    async getDump() {
+        let data = []
+        for (let index = 0; index < 200; index++) {
+            const hr = await this.client.readHoldingRegisters(index*100, 100);
+            data = data.concat(hr.response.body.valuesAsArray);
+        }
+        return data;
     }
 }
 

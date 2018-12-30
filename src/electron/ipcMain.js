@@ -1,12 +1,10 @@
 /* eslint-disable no-console */
 
-const { ipcMain } = require('electron')
+const { ipcMain, dialog, app } = require('electron')
+const fs = require('fs');
 
 const Modbus = require('./modbus')
 const IPC = require('./ipcCommon')
-
-
-const { dialog } = require('electron')
 
 function init(window) {
 
@@ -44,17 +42,37 @@ function init(window) {
         modbus.setRegisters(args)
     }
 
+    const onSaveDump = _ => {
+
+        const options = {
+            defaultPath: app.getPath('documents'),
+            filters: [{
+                name: 'JSON',
+                extensions: ['json']
+              }],
+        }
+
+        dialog.showSaveDialog(options, async name => {
+            if (name) {
+                const start = new Date();
+                const data = await modbus.getDump();
+                const end = new Date();
+                fs.writeFileSync(name, JSON.stringify({
+                    start, end, data
+                }))
+            }
+        })
+    }
 
     ipcMain.on(IPC.SOCKET_CONNECT, onSocketConnect);
     ipcMain.on(IPC.SOCKET_DISCONNECT, modbus.disconnect.bind(modbus));
     ipcMain.on(IPC.SWITCH, onSwitch);
     ipcMain.on(IPC.SET_BIT, onSetBit);
     ipcMain.on(IPC.SET_REGISTERS, onSetRegisters);
+    ipcMain.on(IPC.SAVE_DUMP, onSaveDump);
     ipcMain.on(IPC.TEST, onTest)
 }
 
 module.exports = {
     init: init
 };
-
-
