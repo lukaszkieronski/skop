@@ -31,6 +31,7 @@ class ModbusService extends React.Component {
             setConfig: this.setConfig,
             getParameter: this.getParameter,
             saveParameters: this.saveParameters,
+            saveRegister: this.saveRegister,
             connect: this.connect,
             switch: this.switch,
             saveDump: this.saveDump,
@@ -84,6 +85,11 @@ class ModbusService extends React.Component {
                     break;
             }
         }
+    }
+
+    saveRegister = args => {
+        const { register, value } = args;
+        ipc.send(IPC.SET_REGISTERS, {register , values:[value]});
     }
 
     updateConnection = (_, args) => {
