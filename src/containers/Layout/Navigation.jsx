@@ -22,8 +22,9 @@ class Navigation extends React.Component {
         return (
             <Tabs value={location.pathname} onChange={ (_, location) => history.push(location) }>
                 <Tab value="/device" label="Urządzenie" />
-                <Tab value="/parameters" label="Parametry" />
                 <Tab value="/measures" label="Pomiary" />
+                <Tab value="/programs" label="Programy" />
+                <Tab value="/parameters" label="Parametry" />
                 <Tab value="/settings" label="Ustawienia" />
                 <Tab value="/debug" label="Debug" />
             </Tabs>

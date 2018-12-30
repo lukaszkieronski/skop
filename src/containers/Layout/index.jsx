@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { createStyles, withStyles, AppBar } from '@material-ui/core';
 
 import { ModbusContext, withContext } from 'utils';
-import { Device, Measures, Settings, Parameters, Debug } from 'containers';
+import { Device, Measures, Settings, Parameters, Debug, Programs } from 'containers';
 import Navigation from './Navigation';
 import Disconnected from './Disconnected';
 
@@ -52,6 +52,7 @@ class Layout extends React.Component {
                         <Route path="/device" component={context.connected ? Device : Disconnected} />
                         <Route path="/parameters" component={context.connected ? Parameters : Disconnected} />
                         <Route path="/measures" component={context.connected ? Measures : Disconnected} />
+                        <Route path="/programs" component={context.connected ? Programs : Disconnected} />
                         <Route path="/settings" component={Settings} />
                         <Route path="/debug" component={Debug} />
                         <Redirect to="/device" />
