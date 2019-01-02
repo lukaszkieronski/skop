@@ -239,5 +239,64 @@
         "name": "prędkość zmiany napięcia",
         "min": 0,
         "max": 10000
+    },
+    "plotUrange":{
+        "digits": 3,
+        "register": 9238
+    },
+    "plotIrange":{
+        "digits": 3,
+        "register": 9240
+    },
+    "plotLimUrms":{
+        "digits": 2,
+        "register": 9258
+    },
+    "plotLimIrms":{
+        "digits": 2,
+        "register": 9260
+    },
+    "plotLimFi":{
+        "name": "Faza Fi",
+        "unit": "st",
+        "digits": 2,
+        "register": 9262
+    },
+    "plotLimUrmsRef":{
+        "digits": 2,
+        "register": 9246
+    },
+    "plotLimIrmsRef":{
+        "digits": 2,
+        "register": 9248
+    },
+    "plotLimUrmsMean":{
+        "name": "Urms śr.",
+        "unit": "[kV]",
+        "digits": 2,
+        "register": 9264
+    },
+    "plotLimIrmsMean":{
+        "name": "Irms śr.",
+        "unit": "[mA]",
+        "digits": 2,
+        "register": 9266
+    },
+    "plotUrmsCorrection":{
+        "digits": 3,
+        "register": 9250
+    },
+    "plotUpeakCorrection":{
+        "digits": 3,
+        "register": 9252
+    },
+    "plotIrmsCorrection":{
+        "digits": 3,
+        "register": 9254
+    },
+    "plotIpeakCorrection":{
+        "digits": 3,
+        "register": 9256
     }
+
 }

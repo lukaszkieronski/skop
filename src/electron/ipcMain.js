@@ -64,12 +64,17 @@ function init(window) {
         })
     }
 
+    const onReportRequest = _ => {
+        modbus.requestReport();
+    }
+
     ipcMain.on(IPC.SOCKET_CONNECT, onSocketConnect);
     ipcMain.on(IPC.SOCKET_DISCONNECT, modbus.disconnect.bind(modbus));
     ipcMain.on(IPC.SWITCH, onSwitch);
     ipcMain.on(IPC.SET_BIT, onSetBit);
     ipcMain.on(IPC.SET_REGISTERS, onSetRegisters);
     ipcMain.on(IPC.SAVE_DUMP, onSaveDump);
+    ipcMain.on(IPC.REPORT_REQUEST, onReportRequest);
     ipcMain.on(IPC.TEST, onTest)
 }
 

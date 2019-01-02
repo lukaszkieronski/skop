@@ -31,6 +31,7 @@ class Report extends React.Component {
 
     render = () => {
         const { classes, data } = this.props;
+        if (!data) return
         return (
             <div className={classes.root} >
                 <div className={classes.page} >
@@ -76,8 +77,8 @@ class Report extends React.Component {
                     </div>
 
 
-                    <LineChart width={600} height={300} data={this.data} >
-                        <Line yAxisId="left" type="monotone" dataKey="urms" stroke="#1a4859" isAnimationActive={true} dot={false} />
+                    <LineChart width={600} height={300} data={data.values} >
+                        <Line yAxisId="left" type="monotone" dataKey="urms" stroke="#1a4859" isAnimationActive={false} dot={false} />
                         <Line yAxisId="left" type="monotone" dataKey="upeak" stroke="#2aa069" isAnimationActive={false} dot={false} />
                         <Line yAxisId="right" type="monotone" dataKey="irms" stroke="#fbc42c" isAnimationActive={false} dot={false} />
                         <Line yAxisId="right" type="monotone" dataKey="ipeak" stroke="#f67129" isAnimationActive={false} dot={false} />

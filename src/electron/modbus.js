@@ -122,6 +122,32 @@ class Modbus {
         }
         return data;
     }
+
+    async requestReport() {
+        console.log("report requested")
+        let result = {
+            values: []
+        }
+        const packet = await this.client.readHoldingRegisters(10000,3);
+        const infoArray = packet.response.body.valuesAsArray;
+        console.log(infoArray)
+        const steps = infoArray[0];
+        const temp = infoArray[1];
+        const humidity = infoArray[2];
+        result.info = { steps, temp, humidity }
+        for (let step=0; step < steps; step++) {
+            const stepArray = (await this.client.readHoldingRegisters(10010+step*5,5)).response.body.valuesAsArray
+            result.values.push({
+                step: stepArray[0],
+                urms: stepArray[1],
+                upeak: stepArray[2],
+                irms: stepArray[3],
+                ipeak: stepArray[4],
+            })
+        }
+        this.window.send(IPC.REPORT_RESPONSE, result);
+
+    }
 }
 
 module.exports = Modbus;

@@ -9,5 +9,7 @@ module.exports = {
     SET_BIT: 'modbus-set-bit',
     SET_REGISTERS: 'modbus-set-registers',
     SAVE_DUMP: 'modbus-save-dump',
+    REPORT_REQUEST: 'modbus-report-request',
+    REPORT_RESPONSE: 'modbus-report-response',
     TEST: "test-signal"
 }
