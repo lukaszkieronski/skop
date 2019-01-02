@@ -146,6 +146,25 @@ class Modbus {
             })
         }
         this.window.send(IPC.REPORT_RESPONSE, result);
+    }
+
+    async requestProgramNames() {
+        let result = {
+            basic: [],
+            limiter: []
+        };
+        for (let index=0; index<10; index++) {
+            // const nameArray = (await this.client.readHoldingRegisters(1500+index*25)).response.body.valuesAsArray
+            result.basic.push(`Basic ${index+1}`)
+        }
+        for (let index=0; index<2; index++) {
+            // const nameArray = (await this.client.readHoldingRegisters(1500+index*25)).response.body.valuesAsArray
+            result.limiter.push(`Limiter ${index+1}`)
+        }
+        this.window.send(IPC.PROGRAM_NAMES_RESPONSE, result);
+    }
+
+    async requestProgram() {
 
     }
 }

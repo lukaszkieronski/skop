@@ -28,6 +28,10 @@ class ModbusService extends React.Component {
             config: savedConfig || defaultConfig,
             connected: false,
             registers: new Array(15000),
+            programNames: {
+                basic: [],
+                limiter: []
+            },
             setConfig: this.setConfig,
             getParameter: this.getParameter,
             saveParameters: this.saveParameters,
@@ -35,10 +39,14 @@ class ModbusService extends React.Component {
             connect: this.connect,
             switch: this.switch,
             saveDump: this.saveDump,
+            getProgramNames: this.getProgramNames,
+            getProgram: this.getProgram,
             test: this.test
         }
 
         ipc.on(IPC.MODBUS_RESPONSE, this.updateRegisters);
+        ipc.on(IPC.PROGRAM_NAMES_RESPONSE, this.updateProgramNames);
+        ipc.on(IPC.PROGRAM_RESPONSE, this.updateProgram);
         ipc.on(IPC.SOCKET_STATE, this.updateConnection);
     }
 
@@ -107,6 +115,23 @@ class ModbusService extends React.Component {
         this.setState({ registers })
     };
 
+    updateProgramNames = (_, args) => {
+        this.setState({programNames: args})
+    }
+
+    updateProgram = (_, args) => {
+
+    }
+
+    getProgramNames = _ => {
+        ipc.send(IPC.PROGRAM_NAMES_REQUEST);
+        return ['a', 'b', 'c']
+    }
+
+    getProgram = index => {
+        ipc.send(IPC.PROGRAM_REQUEST, index)
+        return {index}
+    }
 
     render = () => {
         const { children } = this.props;

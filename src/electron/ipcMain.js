@@ -68,6 +68,14 @@ function init(window) {
         modbus.requestReport();
     }
 
+    const onProgramNamesRequest = _ => {
+        modbus.requestProgramNames();
+    }
+
+    const onProgramRequest = index => {
+        modbus.requestProgram(index);
+    }
+
     ipcMain.on(IPC.SOCKET_CONNECT, onSocketConnect);
     ipcMain.on(IPC.SOCKET_DISCONNECT, modbus.disconnect.bind(modbus));
     ipcMain.on(IPC.SWITCH, onSwitch);
@@ -75,6 +83,8 @@ function init(window) {
     ipcMain.on(IPC.SET_REGISTERS, onSetRegisters);
     ipcMain.on(IPC.SAVE_DUMP, onSaveDump);
     ipcMain.on(IPC.REPORT_REQUEST, onReportRequest);
+    ipcMain.on(IPC.PROGRAM_NAMES_REQUEST, onProgramNamesRequest);
+    ipcMain.on(IPC.PROGRAM_REQUEST, onProgramRequest);
     ipcMain.on(IPC.TEST, onTest)
 }
 
