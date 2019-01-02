@@ -1,2 +1,26 @@
 edycja programów
 baza NEdb (https://github.com/louischatriot/nedb)
+
+
+
+1.      Opracowanie danych z PQUBA
+
+2.      Stworzenie bazy danych obiektów/klientów
+
+3.      Generowanie protokołów PDF z możliwoscią wyboru co ma na nich być:
+
+a.      Wykresy
+
+b.     Dla ochronników Iref, Uref+/-dUref, Uznam, Iznam, faza (z PQUBEa)
+
+c.      Harmoniczne prądu (z PQUBEa)
+
+Zawsze ma być
+
+Dane wykonacy: firma (jako pole tekstowe kilkulinijkowe) – zapamiętywana zawarość
+
+Dane wykonującego pomiary: imie nazwisko nr upr. (jako pole tekstowe) – zapamiętywana zawartość
+
+Nazawa obiektu/Klenta: Opis (jako pole tekstowe kilkulinikowe) – do bazy danych
+
+4.      Zapis próby w jakimś pliku dat, żeby można było wszystko kiedyś wczytać do programu, dane j.w, wyniki, charakterystyki itp.

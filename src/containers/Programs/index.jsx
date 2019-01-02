@@ -32,10 +32,10 @@ class Programs extends React.Component {
         this.props.context.getProgramNames();
     }
 
-    renderListItem = (name, index) => {
+    renderListItem = (startIndex) => (name, index) => {
         const { selectedProgram } = this.state;
         return (
-            <ListItem button selected={selectedProgram === index} onClick={this.selectProgram(index)} key={index}>
+            <ListItem button selected={selectedProgram === startIndex+index} onClick={this.selectProgram(startIndex+index)} key={index}>
                 <ListItemText primary={name} />
             </ListItem>
         )
@@ -56,13 +56,13 @@ class Programs extends React.Component {
                 <Paper className={classes.drawer}>
                     <List dense>
                         <ListSubheader component="div">Programy podstawowe</ListSubheader>
-                        {programNames.basic.map(this.renderListItem)}
+                        {programNames.basic.map(this.renderListItem(0))}
                         <ListSubheader component="div">Programy ochronników</ListSubheader>
-                        {programNames.limiter.map(this.renderListItem)}
+                        {programNames.limiter.map(this.renderListItem(10))}
 
                     </List>
                 </Paper>
-                <ProgramEditor program={selectedProgram} />
+                <ProgramEditor selected={selectedProgram} />
             </div>
         )
     }

@@ -72,7 +72,7 @@ function init(window) {
         modbus.requestProgramNames();
     }
 
-    const onProgramRequest = index => {
+    const onProgramRequest = (_,index) => {
         modbus.requestProgram(index);
     }
 

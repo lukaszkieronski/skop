@@ -78,7 +78,7 @@ class Modbus {
         this.socket.once('connect', onConnect);
         this.socket.once('close', onClose);
         this.socket.once('error', (err) => {
-            console.log(err);
+            console.err(err);
         })
 
         this.client = new jsmodbus.client.TCP(this.socket, 1);
@@ -124,13 +124,11 @@ class Modbus {
     }
 
     async requestReport() {
-        console.log("report requested")
         let result = {
             values: []
         }
         const packet = await this.client.readHoldingRegisters(10000,3);
         const infoArray = packet.response.body.valuesAsArray;
-        console.log(infoArray)
         const steps = infoArray[0];
         const temp = infoArray[1];
         const humidity = infoArray[2];
@@ -154,18 +152,32 @@ class Modbus {
             limiter: []
         };
         for (let index=0; index<10; index++) {
-            // const nameArray = (await this.client.readHoldingRegisters(1500+index*25)).response.body.valuesAsArray
+            // const nameArray = (await this.client.readHoldingRegisters(1500+index*25, 25)).response.body.valuesAsArray
             result.basic.push(`Basic ${index+1}`)
         }
         for (let index=0; index<2; index++) {
-            // const nameArray = (await this.client.readHoldingRegisters(1500+index*25)).response.body.valuesAsArray
+            // const nameArray = (await this.client.readHoldingRegisters(1500+index*25, 25)).response.body.valuesAsArray
             result.limiter.push(`Limiter ${index+1}`)
         }
         this.window.send(IPC.PROGRAM_NAMES_RESPONSE, result);
     }
 
-    async requestProgram() {
+    async requestProgram(index) {
+        const steps = (await this.client.readHoldingRegisters(1100+index*30, 30)).response.body.valuesAsArray
+        let result = {
+            steps: [],
+            index
+        }
 
+        for(let i=0; i<10; i++) {
+            result.steps[i] = {
+                parameters: steps[i*3],
+                speed: steps[i*3+1],
+                value: steps[i*3+2]
+            }
+        }
+
+        this.window.send(IPC.PROGRAM_RESPONSE, result);
     }
 }
 
