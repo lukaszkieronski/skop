@@ -2,3 +2,17 @@ html, body, #root {
     height: 100vh;
     overflow: hidden;
 }
+
+@media print {
+    .no-print, .no-print * {
+        display: none !important;
+        height: 0px;
+    }
+}
+
+@media screen {
+    .print-only, .print-only * {
+        display: none !important;
+        height: 0px;
+    }
+}

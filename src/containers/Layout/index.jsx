@@ -11,7 +11,7 @@ import Disconnected from './Disconnected';
 const styles = theme => {
     return createStyles({
         root: {
-            minHeight: "100%",
+            height: '100vh',
             display: "flex",
             flexDirection: "column",
         },
@@ -43,10 +43,10 @@ class Layout extends React.Component {
         const { classes, context } = this.props;
         return (
             <div className={classes.root}>
-                <AppBar>
+                <AppBar className="no-print">
                     <Navigation />
                 </AppBar>
-                <div className={classes.toolbar} />
+                <div className={`${classes.toolbar} no-print`} />
                 <main className={classes.content}>
                     <Switch>
                         <Route path="/device" component={context.connected ? Device : Disconnected} />
